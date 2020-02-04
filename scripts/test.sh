@@ -35,23 +35,10 @@ printf "\nMySql Import DONE\n"
 # ***************
 # Import via AXFR
 # ***************
-printf "\nImporting AXFR\n"
-
-#AXFRImport () {
-	#truncate -s 0 "${testfile}"
-	
-    	#dig axfr rpz.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 +noidnin +noidnout \
-		#| grep -F "CNAME" | grep -vE "(^(\*\.|$))" \
-		#| sed 's/\.rpz\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' \
-		#> "${testfile}"
-
-	#printf "\nImporting AXFR... DONE!\n"
-	##exit ${?}
-#}
-#AXFRImport
+printf "\nImporting RPZ database for adult.mypdns.cloud\n"
 
 ImportRPZ () {
-	mysql -u"${imp_user}" -p"${imp_pw}" -h"${imp_host}" -B -N -e "SELECT TRIM(TRAILING '.rpz.mypdns.cloud' FROM name) AS name FROM pdns.records WHERE \`type\` = 'CNAME' AND domain_id = '36' AND content = '.' LIMIT 10000000;" > "${testfile}"
+	mysql -u"${imp_user}" -p"${imp_pw}" -h"${imp_host}" -B -N -e "SELECT TRIM(TRAILING '.rpz.mypdns.cloud' FROM name) AS name FROM pdns.records WHERE \`type\` = 'CNAME' AND domain_id = '61' AND content = '.' LIMIT 10000000;" > "${testfile}"
 }
 ImportRPZ
 
