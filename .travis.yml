@@ -53,7 +53,7 @@ addons:
   
 install:
   - pip3 install --upgrade pip
-  - pip3 install --no-cache-dir -U "${Pyfunceble_version}"
+  - pip3 install --no-cache-dir -U "git+https://github.com/funilrys/${Pyfunceble_version}"
   #- pip3 install git+https://github.com/funilrys/PyFunceble.git@dev
   #- pip3 install ultimate-hosts-blacklist-whitelist
 
