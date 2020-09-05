@@ -38,7 +38,7 @@ printf "\nMySql Import DONE\n"
 printf "\nImporting RPZ database for adult.mypdns.cloud\n"
 
 ImportRPZ () {
-	mysql -u"${imp_user}" -p"${imp_pw}" -h"${imp_host}" -B -N -e "SELECT TRIM(TRAILING '.rpz.mypdns.cloud' FROM name) AS name FROM pdns.records WHERE \`type\` = 'CNAME' AND domain_id = '61' AND content = '.' LIMIT 10000000;" > "${testfile}"
+	mysql -u"${imp_user}" -p"${imp_pw}" -h"${imp_host}" -B -N -e "SELECT TRIM(TRAILING '.adult.mypdns.cloud' FROM name) AS name FROM pdns.records WHERE \`type\` = 'CNAME' AND domain_id = '61' AND content = '.' LIMIT 10000000;" > "${testfile}"
 }
 ImportRPZ
 
