@@ -21,16 +21,16 @@ source "${TRAVIS_BUILD_DIR}/scripts/variables.sh"
 # ******************
 
 #MySqlImport
-printf "\nMySql import...\n"
-	sudo mysql -u root -h localhost -e "CREATE DATABASE pyfunceble DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-	sudo mysql -u root -h localhost -e "CREATE USER 'root'@'%' IDENTIFIED BY ''"
-	sudo mysql -u root -h localhost -e "CREATE USER 'pyfunceble'@'localhost' IDENTIFIED BY 'pyfunceble';"
-	sudo mysql -u root -h localhost -e "GRANT ALL PRIVILEGES ON pyfunceble.* TO 'pyfunceble'@'localhost';"
-	if [ -f "${HOME}/db/pyfunceble.sql" ]
-	then
-		mysql --user=pyfunceble --password=pyfunceble pyfunceble < "${HOME}/db/pyfunceble.sql"
-	fi
-printf "\nMySql Import DONE\n"
+#printf "\nMySql import...\n"
+#	sudo mariadb -u root -h ${DB_HOST} -e "CREATE DATABASE pyfunceble DEFAULT CHARACTER SET utf8mb4 COLLATE "${DB_CHARSET}";"
+#	sudo mariadb -u root -h ${DB_HOST} -e "CREATE USER 'root'@'%' IDENTIFIED BY ''"
+#	sudo mariadb -u root -h ${DB_HOST} -e "CREATE USER "'"${DB_USERNAME}"'"@'localhost' IDENTIFIED BY "'"${DB_PASSWORD}"'";"
+#	sudo mariadb -u root -h ${DB_HOST} -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO "'"${DB_USERNAME}"'"@'localhost';"
+#	if [ -f "${HOME}/db/pyfunceble.sql" ]
+#	then
+#		mariadb --user="${DB_USERNAME}" --password="${DB_PASSWORD}" ${DB_NAME} < "${HOME}/db/pyfunceble.sql"
+#	fi
+#printf "\nMySql Import DONE\n"
 
 # ***************
 # Import via AXFR
@@ -71,5 +71,10 @@ printf "\nWe have to test $(wc -l < "${testfile}") DNS records.
 #exit ${?}
 
 #bash "${script_dir}/pyfunceble.sh"
+
+touch "${TRAVIS_BUILD_DIR}/run_it"
+truncate -s 0 "${TRAVIS_BUILD_DIR}/run_it"
+echo "date +'%s'" > "${TRAVIS_BUILD_DIR}/run_it"
+
 
 exit ${?}
