@@ -1,7 +1,5 @@
 os: linux
 dist: focal
-name: "DNS record testing for https://www.mypdns.org"
-
 language: python
 
 python:
@@ -41,7 +39,11 @@ env:
     - PYFUNCEBLE_DB_PORT="${DB_PORT}"
 
 addons:
-  mariadb: '10.5'
+  sources:
+    - sourceline: 'ppa:git-core/ppa'
+    - sourceline: 'deb [arch=amd64] http://repo.powerdns.com/ubuntu focal-rec-master main'
+      key_url: 'https://repo.powerdns.com/CBC8B383-pub.asc'
+  #mariadb: '10.5'
   apt:
     packages:
       - dos2unix
@@ -49,11 +51,7 @@ addons:
       - lsof
       - pdns-recursor
       - ldnsutils
-    update: true
-    sources:
-      - sourceline: 'ppa:git-core/ppa'
-      - sourceline: 'deb [arch=amd64] http://repo.powerdns.com/ubuntu focal-rec-master main'
-        key_url: 'https://repo.powerdns.com/CBC8B383-pub.asc'
+  update: true
   
 install:
   - pip3 install --upgrade pip
@@ -72,7 +70,7 @@ sudo: required
 script:
   # We put both in same statement so that if one fails the whole test result will fail.
   #- echo "CPU's" && lscpu | grep -E '^Thread|^Core|^Socket|^CPU\('
-  - sudo systemctl restart mariadb.service pdns-recursor.service
+  #- sudo systemctl restart mariadb.service pdns-recursor.service
   #- sudo mysql -u root -h localhost -e "CREATE DATABASE pyfunceble DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
   #- sudo mysql -u root -h localhost -e "CREATE USER 'root'@'%' IDENTIFIED BY ''"
   #- sudo mysql -u root -h localhost -e "CREATE USER 'pyfunceble'@'localhost' IDENTIFIED BY 'pyfunceble';"
