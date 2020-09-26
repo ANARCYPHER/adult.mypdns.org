@@ -1,0 +1,12 @@
+{
+    "/home/travis/build/dns-test/adult.mypdns.org/test_data/adult.mypdns.cloud.list": {
+        "base": {
+            "datetime_iso": "2020-09-26T02:59:12.923492",
+            "hash": "8b46e42fb36e416f83e8757da3aead6efe275b47970ee7afef645d5a"
+        },
+        "latest": {
+            "datetime_iso": "2020-09-26T02:59:12.923492",
+            "hash": "8b46e42fb36e416f83e8757da3aead6efe275b47970ee7afef645d5a"
+        }
+    }
+}
